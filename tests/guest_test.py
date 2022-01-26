@@ -1,4 +1,6 @@
 import unittest
+from src.bar import Bar
+from src.drinks import Drink
 from src.guest import Guest
 from src.song import Song
 
@@ -40,3 +42,11 @@ class TestGuest(unittest.TestCase):
         song2 = Song("Dreams", "Fleetwood Mac")
         songs = [song1, song2]
         self.assertEqual(None, self.guest.cheer(songs))
+
+    def test_buy_drink(self):
+        bar = Bar()
+        bar.add_drink(Drink("Cola", 3))
+        self.guest.buy_drink(bar, "Cola")
+        self.assertEqual(3, bar.till)
+        self.assertEqual(57, self.guest.wallet)
+        self.assertEqual(0, len(bar.drinks))
