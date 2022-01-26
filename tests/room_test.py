@@ -6,19 +6,6 @@ from src.song import Song
 class TestRoom(unittest.TestCase):
 
     def setUp(self):
-        # self.song_1 = Song("Highway to Hell", "AC/DC")
-        # self.song_2 = Song("The Clansman", "Iron Maiden")
-        # self.song_3 = Song("Ace of Spades", "Motorhead")
-
-        # self.songs = [self.song_1, self.song_2, self.song_3]
-
-        # self.jack = Guest("Jack", 20, self.song_1)
-        # self.victor = Guest("Victor", 15, self.song_2)
-        # self.isa = Guest("Isa", 100, self.song_3)
-
-        # self.guests = [self.jack, self.victor, self.isa]
-
-        # self.winston = Guest("Winston", 10, self.song_2)
         self.room = Room("Room 1", 20, 6)
 
     def test_has_name(self):
