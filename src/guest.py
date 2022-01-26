@@ -17,3 +17,11 @@ class Guest:
                 if song.artist == self.favourite_song.artist:
                     return "Whoo!"
         return None
+
+    def buy_drink(self, bar, drink_name):
+        if bar.has_drink(drink_name):
+            price = bar.get_drink_price(drink_name)
+            if self.has_sufficient_money(price):
+                self.reduce_wallet(price)
+                bar.increase_till(price)
+                bar.remove_drink(drink_name)
