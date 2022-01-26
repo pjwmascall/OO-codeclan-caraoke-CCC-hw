@@ -1,38 +1,55 @@
-def test_create_room(self):
-    pass
+import unittest
+from src.guest import Guest
+from src.room import Room
+from src.song import Song
 
-def test_add_song_to_room(self):
-    pass
+class TestRoom(unittest.TestCase):
 
-def test_check_in_guest(self):
-    pass
+    def setUp(self):
+        self.room = Room("Room 1", 20, 6)
 
-def test_check_out_guest(self):
-    pass
+    def test_has_name(self):
+        self.assertEqual("Room 1", self.room.name)
 
-def test_check_room_capacity_pass(self):
-    pass
+    def test_has_till(self):
+        self.assertEqual(0, self.room.till)
 
-def test_check_room_capacity_fail(self):
-    pass
+    def test_has_entry_fee(self):
+        self.assertEqual(20, self.room.entry_fee)
 
-def test_increase_money(self):
-    pass
+    def test_has_max_guests(self):
+        self.assertEqual(6, self.room.max_guests)
 
-def test_is_song_playing_pass(self):
-    pass
+    def test_increase_till(self):
+        self.room.increase_till(50)
+        self.assertEqual(50, self.room.till)
 
-def test_is_song_playing_fail(self):
-    pass
+    def test_add_song(self):
+        song = Song("Creep", "Radiohead")
+        self.room.add_song(song)
+        self.assertEqual(1, len(self.room.songs))
 
-def test_search_song_by_name(self):
-    pass
+    def test_can_add_guest_pass(self):
+        guest = Guest("Phil", 60, Song("Creep", "Radiohead"))
+        self.assertEqual(True, self.room.can_add_guest(guest))
 
-def test_search_song_by_artist(self):
-    pass
+    def test_can_add_guest_fail_max_capacity(self):
+        while (len(self.room.guests) < self.room.max_guests):
+            self.room.guests.append("guest")
+        guest = Guest("Phil", 60, Song("Creep", "Radiohead"))
+        self.assertEqual(False, self.room.can_add_guest(guest))
 
-def test_has_money(self):
-    pass
+    def test_can_add_guest_fail_no_money(self):
+        guest = Guest("John", 2, Song("My Sharona", "The Knack"))
+        self.assertEqual(False, self.room.can_add_guest(guest))
 
-def test_has_songs(self):
-    pass
+    def test_add_guest(self):
+        guest = Guest("Phil", 60, Song("Creep", "Radiohead"))
+        self.room.add_guest(guest)
+        self.assertEqual(1, len(self.room.guests))
+
+    def test_remove_guest(self):
+        guest = Guest("Phil", 60, Song("Creep", "Radiohead"))
+        self.room.add_guest(guest)
+        self.room.remove_guest(guest)
+        self.assertEqual(0, len(self.room.guests))

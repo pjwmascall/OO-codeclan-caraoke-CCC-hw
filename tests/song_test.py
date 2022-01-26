@@ -1,8 +1,13 @@
-def test_create_song(self):
-    pass
+import unittest
+from src.song import Song
 
-def test_song_has_name(self):
-    pass
+class TestSong(unittest.TestCase):
 
-def test_song_has_artist(self):
-    pass
+    def setUp(self):
+        self.song = Song("Creep", "Radiohead")
+
+    def test_song_has_name(self):
+        self.assertEqual("Creep", self.song.name)
+
+    def test_song_has_artist(self):
+        self.assertEqual("Radiohead", self.song.artist)
